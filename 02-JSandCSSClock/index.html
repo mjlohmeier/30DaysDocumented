@@ -15,12 +15,15 @@ In what order/layout are the divs written?
 How do you make the clock hands "jump"?
 How does the algebra in the main function work?
 What gets written to the Chrome console?
-How do the hands of the clock get rotated?
-How is the rotation of the clock hands programmed?
+How do the hands of the clock rotate?
+How is the rotation of the clock written in code?
 How do I add chickens?-->
 
+
     <div class="clock">
+    <!--Putting the clock face div inside the clock div-->
       <div class="clock-face">
+        <!--Putting the clock hand divs inside the clock face div-->
         <div class="hand hour-hand"></div>
         <div class="hand min-hand"></div>
         <div class="hand second-hand"></div>
@@ -30,7 +33,8 @@ How do I add chickens?-->
 
   <style>
     html {
-      background: #018DED url(http://unsplash.it/1500/1000?image=881&blur=50);
+    /*Change to chicken*/
+      background: #018DED url(https://thefrugalchicken.com/wp-content/uploads/2017/06/charcoal-for-chickens-feature.jpg);
       background-size: cover;
       font-family: 'helvetica neue';
       text-align: center;
@@ -40,13 +44,17 @@ How do I add chickens?-->
     body {
       margin: 0;
       font-size: 2rem;
+      /*Setting flex properties, probably for good reasons*/
       display: flex;
       flex: 1;
+      /*Research min-height*/
       min-height: 100vh;
+      /*Research align-items*/
       align-items: center;
     }
 
     .clock {
+    /*Find out how it gets drawn as a circle*/
       width: 30rem;
       height: 30rem;
       border: 20px solid white;
@@ -65,22 +73,74 @@ How do I add chickens?-->
       position: relative;
       width: 100%;
       height: 100%;
-      transform: translateY(-3px); /* account for the height of the clock hands */
+    /*Account for the height of the clock hands*/
+    /*Research transform, find out why translateY is used*/
+      transform: translateY(-3px);
     }
 
     .hand {
       width: 50%;
       height: 6px;
       background: black;
+      /*Uses position absolute but changes based on function properties and CSS transform*/
       position: absolute;
+      /*Research top*/
       top: 50%;
+      transform-origin: 100%;
+      /*Uses 90 degrees as transform property but functionality is less than 90 degree rotation (I think)*/
+      transform: rotate(90deg);
+      /*Waiting 0.05s between ticks for all hands*/
+      transition: all 0.05s;
+      /*Research cubic-bezier, change parameters*/
+      /*Making the ticks jump and wobble a bit*/
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+    }
+</style>
+
+<script>
+    //Looking back at the classes inside the clock face to set different rotations
+    const secondHand = document.querySelector('.second-hand');
+    const minsHand = document.querySelector('.min-hand');
+    const hourHand = document.querySelector('.hour-hand');
+
+    //Doing math for each kind of rotation and writing to the DOM (or does that happen somewhere else?)
+    //Find out where rotations get written to the DOM
+    function setDate() {
+        //Making now a variable that works in setDate()
+        //Research Date()
+        const now = new Date();
+        
+        //Figure out how now.getSeconds is counted
+        const seconds = now.getSeconds();
+        //Multiplying fractions of a minute to calculate position following rotation
+        //Adding 90, I guess to complete the rotation or get around absolute properties
+        //Find out why it adds 90
+        const secondsDegrees = ((seconds / 60) * 360) + 90;
+        //Setting transform to previously defined const secondsDegrees
+        //Research below syntax (I don't know what you call it)
+        secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+        
+        //Defined in exactly the same way as seconds with some new algebra
+        const mins = now.getMinutes();
+        //Uses value of seconds to calculate degrees of rotation
+        const minsDegrees = ((mins / 60) * 360) + ((seconds/60)*6) + 90;
+        minsHand.style.transform = `rotate(${minsDegrees}deg)`;
+
+        //More repeated definitions with additional algebra
+        const hour = now.getHours();
+        //Uses value of minutes to calculate degrees of rotation
+        const hourDegrees = ((hour / 12) * 360) + ((mins/60)*30) + 90;
+        hourHand.style.transform = `rotate(${hourDegrees}deg)`;
     }
 
-  </style>
+    //My guess is that this runs asynchronously, i.e. before the main body of setDate()
+    setInterval(setDate, 1000);
 
-  <script>
+    //Call
+    setDate();
 
+</script>
 
-  </script>
 </body>
+
 </html>
