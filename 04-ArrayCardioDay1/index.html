@@ -2,14 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Array Cardio 💪</title>
+  <title>Array Cardio</title>
 </head>
 <body>
-  <p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
+  <p><em>Reminder: Look at the JavaScript Console</em></p>
   <script>
-    // Get your shorts on - this is an array workout!
-    // ## Array Cardio Day 1
-
+    
     // Some data we can work with
 
     const inventors = [
@@ -28,11 +26,29 @@
     ];
 
     const people = ['Beck, Glenn', 'Becker, Carl', 'Beckett, Samuel', 'Beddoes, Mick', 'Beecher, Henry', 'Beethoven, Ludwig', 'Begin, Menachem', 'Belloc, Hilaire', 'Bellow, Saul', 'Benchley, Robert', 'Benenson, Peter', 'Ben-Gurion, David', 'Benjamin, Walter', 'Benn, Tony', 'Bennington, Chester', 'Benson, Leana', 'Bent, Silas', 'Bentsen, Lloyd', 'Berger, Ric', 'Bergman, Ingmar', 'Berio, Luciano', 'Berle, Milton', 'Berlin, Irving', 'Berne, Eric', 'Bernhard, Sandra', 'Berra, Yogi', 'Berry, Halle', 'Berry, Wendell', 'Bethea, Erin', 'Bevan, Aneurin', 'Bevel, Ken', 'Biden, Joseph', 'Bierce, Ambrose', 'Biko, Steve', 'Billings, Josh', 'Biondo, Frank', 'Birrell, Augustine', 'Black Elk', 'Blair, Robert', 'Blair, Tony', 'Blake, William'];
-
-    // Array.prototype.filter()
+    
     // 1. Filter the list of inventors for those who were born in the 1500's
-    const fifteen = inventors.filter(inventor => (inventor.year >= 1500 && inventor.year < 1600));
-
+    
+    //Questions:
+    //How is the table written to the console?
+    //What naming conventions are used here?
+    //If naming conventions are not used, why not?
+    //Why did Wes decide to use an arrow function?
+    //How could this solution be written without an arrow function?
+    //What is the syntax for .filter()?
+    
+    //Defining a const to be used as a parameter in console.table()
+    const fifteen =
+    //Using .filter() on const inventors, defined previously as an array of objects
+    inventors.filter(
+        //Beginning an arrow function that looks at a single object inventor from the inventors array of objects
+        inventor =>
+        //Specifying the year key of each inventor object
+        (inventor.year 
+        //Defining comparison operators to get only the inventors who were born between 1500 and 1599.999...
+        >= 1500 && inventor.year < 1600));
+    //Putting function output in the browser as a table
+    //Research table()
     console.table(fifteen);
 
     // Array.prototype.map()
