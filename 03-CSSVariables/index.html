@@ -4,11 +4,24 @@
   <meta charset="UTF-8">
   <title>Scoped CSS Variables and JS</title>
 </head>
+
+<!--Questions
+Why is there both a change and a mousemove?
+What does the querySelectorAll do?
+How is the handleUpdate function's output written to the page?
+How is the inputs variable defined?
+How is the inputs variable used?
+Why is there both a 'change' event listener and a 'mousemove' listener?
+How are the double dash CSS properties used?
+What does const suffix do?-->
+
 <body>
   <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
 
   <div class="controls">
+    <!--Creating the sliders-->
     <label for="spacing">Spacing:</label>
+    <!--Setting slider properties-->
     <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
 
     <label for="blur">Blur:</label>
@@ -22,24 +35,25 @@
 
   <style>
     :root {
+    /*Making a CSS variable available*/
       --base: #ffc600;
       --spacing: 10px;
       --blur: 10px;
     }
 
     img {
+    /*Setting root to HTML img*/
       padding: var(--spacing);
       background: var(--base);
       filter: blur(var(--blur));
     }
 
     .hl {
+    /*Setting color of 'JS' in page title*/
       color: var(--base);
     }
 
-    /*
-      misc styles, nothing to do with CSS variables
-    */
+    /*misc styles, nothing to do with CSS variables*/
 
     body {
       text-align: center;
@@ -59,24 +73,23 @@
     }
   </style>
 
-<!--Questions
-Why is there both a change and a mousemove?
-What does the querySelectorAll do?
-How is the handleUpdate function's output written to the page?
-How is the inputs variable defined?
-How is the inputs variable used?
-Why is there both a 'change' event listener and a 'mousemove' listener?
-How are the double dash CSS properties used?
-What does const suffix do?-->
-
   <script>
+    //Selecting input sliders of class "controls" and making them available to const inputs
     const inputs = document.querySelectorAll('.controls input');
 
+    //Research handleUpdate()
     function handleUpdate() {
-      const suffix = this.dataset.sizing || '';
-      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+        
+        //I think this uses data-sizing="px"
+        //Find out how data-sizing="px" is used
+        const suffix = this.dataset.sizing || '';
+        //Research setProperty()
+        //Double dashes use CSS variables
+        document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
     }
-
+    
+    //Calling handleUpdate as input changes 
+    //Uses both change and mousemove to update as you slide
     inputs.forEach(input => input.addEventListener('change', handleUpdate));
     inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
   </script>
