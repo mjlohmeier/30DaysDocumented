@@ -51,9 +51,21 @@
     //Research table()
     console.table(fifteen);
 
-    // Array.prototype.map()
     // 2. Give us an array of the inventor first and last names
-    const fullNames = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
+
+    //Questions:
+    //What are the backticks used for?
+    //What kind of data is logged by fullNames?
+    //How is the fullNames data separated?
+
+    //Going into the inventors object to return an array of first and last names
+    const fullNames = inventors.map(
+      //Defining a callback to the inventors object
+      inventor =>
+      //Grabbing keys first and last from inventors
+      //Using template strings to fix spacing
+      `${inventor.first} ${inventor.last}`);
+    //Logging function output
     console.log(fullNames);
 
     // Array.prototype.sort()
