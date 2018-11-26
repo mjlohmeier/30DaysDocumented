@@ -68,16 +68,29 @@
     //Logging function output
     console.log(fullNames);
 
-    // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+
+    //Questions:
+    //How is the ternary operator used?
+    //How does a comparison of two values sort an array of more than two values?
+    //Why does the code return 1 or negative 1?
+    //
+    //Sort method compares two values of an array
+    //Method runs along entire array until values are ordered
+    //Function ordered uses a and b as placeholders 
+    //If statements compare year values to order inventors array
     // const ordered = inventors.sort(function(a, b) {
+    // Research bubbling
     //   if(a.year > b.year) {
+    //   Research returns in sort method
     //     return 1;
     //   } else {
     //     return -1;
     //   }
     // });
-
+    
+    //Ternary operator takes the place of if and else statements
+    //Research ternary operators
     const ordered = inventors.sort((a, b) => a.year > b.year ? 1 : -1);
     console.table(ordered);
 
